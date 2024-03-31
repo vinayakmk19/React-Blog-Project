@@ -28,7 +28,7 @@ export class AuthServices {
         return userAccount;
       }
     } catch (error) {
-        console.log("Error in services :: createAccount() method", error)
+      console.log("Error in services :: createAccount() method", error);
     }
   }
 
@@ -36,7 +36,7 @@ export class AuthServices {
     try {
       return await this.account.createEmailSession(email, password);
     } catch (error) {
-        console.log("Error in services :: login() method", error)
+      console.log("Error in services :: login() method", error);
     }
   }
 
@@ -49,11 +49,11 @@ export class AuthServices {
     return null;
   }
 
-  async logout(){
+  async logout() {
     try {
-        await this.account.deleteSessions();  
+      await this.account.deleteSessions();
     } catch (error) {
-        console.log("Error in services :: logout() method", error)
+      console.log("Error in services :: logout() method", error);
     }
   }
 }

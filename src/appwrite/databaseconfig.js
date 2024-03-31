@@ -52,66 +52,75 @@ export class Service {
     }
   }
 
-  async deletePost(slug){
+  async deletePost(slug) {
     try {
-        await this.databases.deleteDocument(config.appwriteDatabaseId, config.appwriteColletionId, slug);
-
-        
+      await this.databases.deleteDocument(
+        config.appwriteDatabaseId,
+        config.appwriteColletionId,
+        slug
+      );
     } catch (error) {
-        console.log("Error in Database services :: deletePost() ", error);
-        return false
+      console.log("Error in Database services :: deletePost() ", error);
+      return false;
     }
   }
 
-  async getPost(slug){
+  async getPost(slug) {
     try {
-        return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteColletionId, slug)
+      return await this.databases.getDocument(
+        config.appwriteDatabaseId,
+        config.appwriteColletionId,
+        slug
+      );
     } catch (error) {
-        console.log("Error in Database services :: getPost() ", error);
-        return false
+      console.log("Error in Database services :: getPost() ", error);
+      return false;
     }
   }
 
-  async getPosts(queries = [Query.equal('status', 'active')]){
+  async getPosts(queries = [Query.equal("status", "active")]) {
     try {
-        return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteColletionId, queries)
-        
+      return await this.databases.listDocuments(
+        config.appwriteDatabaseId,
+        config.appwriteColletionId,
+        queries
+      );
     } catch (error) {
-        console.log("Error in Database services :: getPosts() ", error);
-        return false 
+      console.log("Error in Database services :: getPosts() ", error);
+      return false;
     }
   }
 
   // File Upload Services
 
-  async uploadFile(file){
+  async uploadFile(file) {
     try {
-        return await this.bucket.createFile( config.appwriteBucketId, ID.unique(), file)
-        
+      return await this.bucket.createFile(
+        config.appwriteBucketId,
+        ID.unique(),
+        file
+      );
     } catch (error) {
-        console.log("Error in Database services :: uploadFile() ", error);
-        return false 
+      console.log("Error in Database services :: uploadFile() ", error);
+      return false;
     }
   }
 
-  async deleteFile(fileId){
+  async deleteFile(fileId) {
     try {
-        await this.bucket.deleteFile(config.appwriteBucketId, fileId);
+      await this.bucket.deleteFile(config.appwriteBucketId, fileId);
 
-        return true;
-        
+      return true;
     } catch (error) {
-        console.log("Error in Database services :: deleteFile() ", error);
-        return false    
+      console.log("Error in Database services :: deleteFile() ", error);
+      return false;
     }
   }
 
-  getFilePreview(fileId){
-    return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+  getFilePreview(fileId) {
+    return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
   }
 }
-
-
 
 const service = new Service();
 
