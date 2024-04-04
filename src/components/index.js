@@ -8,5 +8,8 @@ import Login from "./Login";
 import RTE from "./RTE";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
+import AuthLayout from './AuthLayout'
+import Button from './Button';
 
-export {Header, Footer, Container, Logo, LogoutBtn, RTE, SignUp, Login, PostForm, PostCard};
+
+export {Header, Footer, Container, Logo, LogoutBtn, RTE, SignUp, Login, PostForm, PostCard, AuthLayout, Button};
