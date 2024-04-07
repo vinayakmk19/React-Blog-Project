@@ -6,15 +6,16 @@ export class AuthServices {
   account;
 
   constructor() {
-
     console.log(config.appwriteUrl)
+
     this.client
       .setEndpoint(config.appwriteUrl)
       .setProject(config.appwriteProjectId);
 
     this.account = new Account(this.client);
+    console.log(this.account);
   }
-
+  
   async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
@@ -36,7 +37,9 @@ export class AuthServices {
 
   async login({ email, password }) {
     try {
-      return await this.account.createEmailSession(email, password);
+      console.log(email);
+      console.log(password);
+      return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
       console.log("Error in services :: login() method", error);
     }

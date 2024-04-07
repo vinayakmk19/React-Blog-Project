@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { Client, Databases, Storage, Query } from "appwrite";
+import { Client, Databases, Storage, Query, ID } from "appwrite";
 
 export class Service {
   client = new Client();
@@ -8,8 +8,8 @@ export class Service {
 
   constructor() {
     this.client
-      .setEndpoint(config.appwriteUrl)
-      .setProject(config.appwriteProjectId);
+      .setEndpoint("https://cloud.appwrite.io/v1")
+      .setProject("6607f7eecd2a3198cde5");
 
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
@@ -18,8 +18,8 @@ export class Service {
   async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
       return await this.databases.createDocument(
-        config.appwriteDatabaseId,
-        config.appwriteColletionId,
+        "6607f9379bc78ca07ae8",
+        "6607f95313c6f4eb9291",
         slug,
         {
           title,
@@ -37,8 +37,8 @@ export class Service {
   async updatePost(slug, { title, content, featuredImage, status }) {
     try {
       return await this.databases.updateDocument(
-        config.appwriteDatabaseId,
-        config.appwriteColletionId,
+        "6607f9379bc78ca07ae8",
+        "6607f95313c6f4eb9291",
         slug,
         {
           title,
@@ -55,8 +55,8 @@ export class Service {
   async deletePost(slug) {
     try {
       await this.databases.deleteDocument(
-        config.appwriteDatabaseId,
-        config.appwriteColletionId,
+        "6607f9379bc78ca07ae8",
+        "6607f95313c6f4eb9291",
         slug
       );
     } catch (error) {
@@ -78,7 +78,7 @@ export class Service {
     }
   }
 
-  async getPosts(queries = [Query.equal("status", "active")]) {
+  async getPosts(queries = [Query.equal("status", ["active"])]) {
     try {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId,
